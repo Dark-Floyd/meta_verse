@@ -1,0 +1,14 @@
+.item {
+    display: flex;
+    flex-direction: row;
+    height: 10px;
+    width: 10px;
+    border: 1px solid gray;
+    border-radius: 0px;
+    margin: 0;
+  }
+  
+  .item:hover {
+    border: 1px solid papayawhip;
+  }
+  

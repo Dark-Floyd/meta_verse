@@ -1,0 +1,8 @@
+.allLand {
+    display: grid;
+    grid-template-columns: repeat(100, auto);
+    grid-template-rows: repeat(100, auto);
+    margin-top: 50px;
+    margin-bottom: 100px;
+  }
+  

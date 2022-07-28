@@ -2,13 +2,13 @@ import React from 'react'
 
 
 
-const Home = () =>{
+const LandInfo = () =>{
 
     return(
         <div>
-            Home
+            LandInfo
         </div>
     )
 }
 
-export default Home;
+export default LandInfo;

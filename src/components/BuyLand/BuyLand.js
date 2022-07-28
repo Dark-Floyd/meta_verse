@@ -2,13 +2,13 @@ import React from 'react'
 
 
 
-const SignIn = () =>{
+const BuyLand = () =>{
 
     return(
         <div>
-            SignIn
+            BuyLand
         </div>
     )
 }
 
-export default SignIn;
+export default BuyLand;

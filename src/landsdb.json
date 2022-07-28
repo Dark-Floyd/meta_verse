@@ -1,0 +1,26 @@
+[
+    {
+      "owner": "buy2",
+      "ownerID": "62c44149a351fabcf2dca35f",
+      "type": "Real Estate",
+      "price": 16,
+      "forSale": false,
+      "game": "https://netanel.vercel.app/"
+    },
+    {
+      "owner": "Netanel.Ltd",
+      "ownerID": "62c2cc3aebe5cfc230438714",
+      "type": "Real Estate",
+      "price": 121,
+      "game": "",
+      "forSale": false
+    },
+    {
+      "owner": "Netanel.Ltd",
+      "ownerID": "62c2cc3aebe5cfc230438714",
+      "type": "Real Estate",
+      "price": 92,
+      "game": "",
+      "forSale": false
+    }
+]
