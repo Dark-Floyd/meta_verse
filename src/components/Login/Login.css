@@ -10,3 +10,9 @@
   padding: 2rem;
   border-radius: 3rem;
 }
+
+.login-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}

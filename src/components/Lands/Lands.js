@@ -1,7 +1,6 @@
 import "./Lands.css";
 import { useEffect, useState } from "react";
 import { Navigate } from "react-router-dom";
-import Map from "../Map/Map";
 import SingleLand from "../SingleLand/SingleLand";
 import {lands3} from '../../lands'
 

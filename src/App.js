@@ -9,26 +9,46 @@ import LandInfo from './components/LandInfo/LandInfo'
 import BuyLand from './components/BuyLand/BuyLand'
 import UpdateLandInfo from './components/UpdateLandInfo/UpdateLandInfo'
 import About from './components/About/About'
+import { useState } from 'react'
+import UserContext from './UserContext'
+import Dashboard from './components/Dashboard/Dashboard'
 function App() {
+  const currentUser = useState({})
+  const [token, setToken] = useState({ username: null, password: null })
+
   return (
-    <div className="App">
-      <CustomNavbar />
-      <Routes>
-        <Route
-          path="/login"
-          element={
-            <Container>
-              <Login />
-            </Container>
-          }
-        />
-        <Route path="/signup" element={<SignUp />} />
-        <Route path="/about" element={<About />} />
-        <Route path="/lands" element={<Lands />} />
-        <Route path="/land/:id" element={<LandInfo />} />
-        <Route path="/buyland/:id" element={<BuyLand />} />
-        <Route path="/updateland/:id" element={<UpdateLandInfo />} />
-      </Routes>
+    <div>
+      {!token.username ? (
+        <div>
+          <CustomNavbar />
+          <Routes>
+            <Route
+              path="/login"
+              element={<Login setToken={setToken} token={token} />}
+            />
+            <Route path="/signup" element={<SignUp />} />
+          </Routes>
+        </div>
+      ) : (
+        <UserContext.Provider value={currentUser}>
+          <div className="App">
+            <CustomNavbar />
+            <Routes>
+            <Route
+              path="/login"
+              element={<Login setToken={setToken} token={token} />}
+            />
+              <Route path="/signup" element={<SignUp />} />
+              <Route path="/about" element={<About />} />
+              <Route path="/lands" element={<Lands />} />
+              <Route path="/land/:id" element={<LandInfo />} />
+              <Route path="/buyland/:id" element={<BuyLand />} />
+              <Route path="/updateland/:id" element={<UpdateLandInfo />} />
+              <Route path="/dashboard" element={<Dashboard />} />
+            </Routes>
+          </div>
+        </UserContext.Provider>
+      )}
     </div>
   )
 }
