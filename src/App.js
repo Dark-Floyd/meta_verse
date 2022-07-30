@@ -14,17 +14,18 @@ import UserContext from './UserContext'
 import Dashboard from './components/Dashboard/Dashboard'
 function App() {
   const currentUser = useState({})
-  const [token, setToken] = useState({ username: null, password: null })
-
+  const [userCreds, setUserCreds] = useState({ userId: null, token: null })
+  const [connected, setConnected] = useState(false)
   return (
     <div>
-      {!token.username ? (
+      {!connected ? (
         <div>
+          {console.log(connected)}
           <CustomNavbar />
           <Routes>
             <Route
               path="/login"
-              element={<Login setToken={setToken} token={token} />}
+              element={<Login setUserCreds={setUserCreds} userCreds={userCreds} setConnected={setConnected} connected={connected}/>}
             />
             <Route path="/signup" element={<SignUp />} />
           </Routes>
@@ -36,7 +37,7 @@ function App() {
             <Routes>
             <Route
               path="/login"
-              element={<Login setToken={setToken} token={token} />}
+              element={<Login setUserCreds={setUserCreds} userCreds={userCreds} setConnected={setConnected} connected={connected} />}
             />
               <Route path="/signup" element={<SignUp />} />
               <Route path="/about" element={<About />} />

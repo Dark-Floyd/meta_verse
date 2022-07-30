@@ -23,7 +23,7 @@ const SingleLand = ({ info }) => {
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   return (
-    <Link to={`/land/${_id}`} land={info}>
+    <Link to={`/lands/${_id}`} land={info}>
       <span className="SingleLand">
         <div className="item" style={{ backgroundColor: color }}></div>
       </span>
