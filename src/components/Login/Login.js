@@ -71,26 +71,7 @@ const Login = ({ setUserCreds, userCreds, connected, setConnected }) => {
           </form>
      
       </div>
-//     <Container className="login-wrapper"><form onSubmit={handleSubmit}>
 
-//     <h3>Log in</h3>
-
-//     <div className="form-group">
-//         <label>Email</label>
-//         <input type="text" className="form-control" placeholder="Enter email"   onChange={(e) => setUserName(e.target.value)}/>
-//     </div>
-
-//     <div className="form-group">
-//         <label>Password</label>
-//         <input type="password" className="form-control" placeholder="Enter password" onChange={(e) => setPassword(e.target.value)} />
-//     </div>
-
-   
-
-//     <button type="submit" className="btn btn-dark btn-lg btn-block" style={{margin:'2rem',alignContent:'center'}}>Sign in</button>
-   
-// </form></Container>
-      
     )
 }
 
