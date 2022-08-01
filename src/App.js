@@ -20,7 +20,6 @@ function App() {
     <div>
       {!connected ? (
         <div>
-          {console.log(connected)}
           <CustomNavbar />
           <Routes>
             <Route
@@ -42,7 +41,7 @@ function App() {
               <Route path="/signup" element={<SignUp />} />
               <Route path="/about" element={<About />} />
               <Route path="/lands" element={<Lands />} />
-              <Route path="/land/:id" element={<LandInfo />} />
+              <Route path="/lands/:id" element={<LandInfo token={userCreds.token}/>} />
               <Route path="/buyland/:id" element={<BuyLand />} />
               <Route path="/updateland/:id" element={<UpdateLandInfo />} />
               <Route path="/dashboard" element={<Dashboard />} />

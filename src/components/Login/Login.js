@@ -1,5 +1,5 @@
 import React, { Fragment, useState } from 'react'
-import { Card, Col, Row } from 'react-bootstrap'
+import { Card, Col, Container, Row } from 'react-bootstrap'
 import classes from './Login.css'
 import PropTypes from 'prop-types'
 import { Link, Navigate } from 'react-router-dom'
@@ -36,31 +36,61 @@ const Login = ({ setUserCreds, userCreds, connected, setConnected }) => {
     return <Navigate to="/lands" />
   } else
     return (
-      <div className="login-wrapper">
-        <h1>Please Log In</h1>
-        <form onSubmit={handleSubmit}>
-          <label>
-            <p>Username</p>
-            <input type="text" onChange={(e) => setUserName(e.target.value)} />
-          </label>
-          <label>
-            <p>Password</p>
-            <input
-              type="password"
-              onChange={(e) => setPassword(e.target.value)}
-            />
-          </label>
-          <div>
-            <button type="submit">Submit</button>
-          </div>
+      <div className="login-wrapper" style={{alignContent:'center'}}>
+        
+          <h1>Please Log In</h1>
+          <form onSubmit={handleSubmit}>
+            <Row>
+              <p>Username</p>
+            </Row>
+            <Row>
+              <label>
+                <input
+                  type="text"
+                  onChange={(e) => setUserName(e.target.value)}
+                />
+              </label>
+              <label>
+                <p>Password</p>
+                <input
+                  type="password"
+                  onChange={(e) => setPassword(e.target.value)}
+                />
+              </label>
+            </Row>
 
-          <Link to={`/signup`}>
             <div>
-              <button type="submit">Sign Up</button>
+              <button type="submit">Submit</button>
             </div>
-          </Link>
-        </form>
+
+            <Link to={`/signup`}>
+              <div>
+                <button type="submit">Sign Up</button>
+              </div>
+            </Link>
+          </form>
+     
       </div>
+//     <Container className="login-wrapper"><form onSubmit={handleSubmit}>
+
+//     <h3>Log in</h3>
+
+//     <div className="form-group">
+//         <label>Email</label>
+//         <input type="text" className="form-control" placeholder="Enter email"   onChange={(e) => setUserName(e.target.value)}/>
+//     </div>
+
+//     <div className="form-group">
+//         <label>Password</label>
+//         <input type="password" className="form-control" placeholder="Enter password" onChange={(e) => setPassword(e.target.value)} />
+//     </div>
+
+   
+
+//     <button type="submit" className="btn btn-dark btn-lg btn-block" style={{margin:'2rem',alignContent:'center'}}>Sign in</button>
+   
+// </form></Container>
+      
     )
 }
 

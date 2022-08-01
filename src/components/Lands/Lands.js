@@ -1,39 +1,34 @@
-import "./Lands.css";
-import { useEffect, useState } from "react";
-import { Navigate } from "react-router-dom";
-import SingleLand from "../SingleLand/SingleLand";
-import {lands3} from '../../lands'
-
-
+import './Lands.css'
+import { useCallback, useEffect, useState } from 'react'
+import { Navigate } from 'react-router-dom'
+import SingleLand from '../SingleLand/SingleLand'
+import { lands3 } from '../../lands'
+import { getAllLands } from '../../api/index'
+import { Spinner } from 'react-bootstrap'
 
 const Lands = () => {
-  const [lands, setLands] = useState([]);
+  const [lands, setLands] = useState([])
+
+  const fetchLands = useCallback(async () => {
+    const res = await getAllLands()
+    console.log(res)
+    setLands(res)
+  }, [])
+  const renderLands = (lands) => {
+    return lands.map((land, index) => <SingleLand key={index} info={land} />)
+  }
 
   useEffect(() => {
-    //requestsLands();
-    localStorage.removeItem("BuyLand");
-  }, []);
+    fetchLands()
+  }, [])
 
-//   async function requestsLands() {
-//     const res = await fetch("api/lands");
-//     const json = await res.json();
-//     setLands(json);
-//   }
-
-//   if (!localStorage.getItem("user")) {
-//     return <Navigate to="/log-in" />;
-//   } else
-    return (
-      <div className="allLand">
+  return (
+    <div>
       
-        {!lands3.length ? (
-          <h1>Loading...</h1>
-        ) : (
-          lands3.map((land, index) => <SingleLand key={index} info={land} />)
-        )}
-        
-      </div>
-    );
-};
+        {lands ? <div className="allLand">{renderLands(lands)} </div> : <Spinner animation="grow" />}
+     
+    </div>
+  )
+}
 
-export default Lands;
+export default Lands
