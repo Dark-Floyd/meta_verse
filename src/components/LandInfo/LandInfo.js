@@ -6,7 +6,7 @@ import { Navigate } from 'react-router-dom'
 import { buyLand, getSingleLand, getUserDetails } from '../../api'
 import { Button, ButtonGroup, Card, Spinner } from 'react-bootstrap'
 
-const LandInfo = (token) => {
+const LandInfo = (token,userId) => {
   const params = useParams()
   const [id] = useState(params.id)
 
@@ -21,7 +21,6 @@ const LandInfo = (token) => {
   }, [])
 
   const fetchUserDetails = useCallback(async () => {
-    console.log(token.token)
     const res = await getUserDetails(token.token)
     console.log(res)
     setMoney(res)
@@ -42,6 +41,7 @@ const LandInfo = (token) => {
           <Card.Text>Price:{land.price}</Card.Text>
         </Card.Body>
         <Card.Footer>
+           {land.ownerId === userId.userId ? <div>you own this</div> : <div>you dont own this</div>} 
           {land.isOnSale ? (
             <div>This property is for sale!</div>
           ) : (
@@ -74,12 +74,15 @@ const LandInfo = (token) => {
   useEffect(() => {
     fetchSingleLand()
     fetchUserDetails()
+    fetchTryToBuy()
   }, [money])
   return (
     <div>
       {land ? <div>{renderLand(land)} </div> : <Spinner animation="grow" />}
       {money ? <div>{renderMoney(money)} </div> : <Spinner animation="grow" />}
-      {isBought? <div>This property belongs to you</div>:<div>You cannot buy this property</div>}
+      {!isBought? <div>This property belongs to you</div>:<div>You cannot buy this property</div>}
+      
+      
       <Card>
         <ButtonGroup aria-label="Basic example">
           <Button variant="secondary" onclick={handleBuying}>Buy</Button>
@@ -89,76 +92,9 @@ const LandInfo = (token) => {
       </Card>
     </div>
 
-    //   <div className="wrapper">
-    //     <div className="title-landInfo">
-    //       <h2>
-    //         <u>Land Information</u>
-    //       </h2>
-    //     </div>
-    //     <div className="edit-info">
-    //       {localStorage.getItem("user") === landFromDB.ownerID &&
-    //         landFromDB.type === "Real Estate" && (
-    //           <Link
-    //             land={landFromDB}
-    //             id="edit-land"
-    //             to={`/updateLand/${landFromDB._id}`}
-    //           >
-    //             edit land
-    //           </Link>
-    //         )}
-    //     </div>
-    //     <div className="content">
-    //       <div>
-    //         <u>
-    //           <strong>Owner:</strong>
-    //         </u>{" "}
-    //         {landFromDB.owner}
-    //       </div>
-    //       <div>
-    //         <u>
-    //           <strong>type of land:</strong>
-    //         </u>{" "}
-    //         {landFromDB.type}
-    //       </div>
-    //       {landFromDB.type === "Real Estate" && (
-    //         <div>
-    //           <u>
-    //             <strong>Is for sale:</strong>
-    //           </u>{" "}
-    //           {landFromDB.forSale === true ? "Yes!" : "No 😒"}
-    //         </div>
-    //       )}
-    //       {landFromDB.type === "Real Estate" && landFromDB.forSale === true && (
-    //         <div className="buy-land">
-    //           <u>
-    //             <strong>Land price:</strong>
-    //           </u>{" "}
-    //           {landFromDB.price} $
-    //           {currentUser.id !== landFromDB.ownerID &&
-    //             currentUser.role === "Buyer" && (
-    //               <div className="link-buy-land">
-    //                 <br />
-    //                 <br />
-    //                 <Link id="buy-land" to={`/buy-land/${landFromDB._id}`}>
-    //                   Buy This Land
-    //                 </Link>
-    //               </div>
-    //             )}
-    //         </div>
-    //       )}
-    //     </div>
-
-    //     {landFromDB.type === "Real Estate" && (
-    //       <iframe
-    //         id="game-window"
-    //         title="game-window"
-    //         src={landFromDB.game}
-    //         width="1000px"
-    //         height="500px"
-    //       ></iframe>
-    //     )}
-    //   </div>
+    
   )
 }
 
 export default LandInfo
+//ownerId
