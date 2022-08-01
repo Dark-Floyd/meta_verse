@@ -6,7 +6,7 @@ const About = () =>{
 
     return(
         <div>
-            About
+            Project made by Dan Kissilevich and Zohar Zaborski
         </div>
     )
 }

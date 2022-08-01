@@ -9,6 +9,7 @@ const SignUp = () => {
   const [userRole, setUserRole] = useState()
   const [name, setName] = useState()
   const navigate = useNavigate()
+
   const signUpUser = useCallback(async () => {
     const res = await userSignUp(userName, userPassword, userRole, name)
     console.log(res)
@@ -20,6 +21,7 @@ const SignUp = () => {
       <Row>
         <Col>
           <Card style={classes.card}>
+              <form onSubmit={signUpUser}>
             <Card.Body>
               <Card.Title>SignUp</Card.Title>
 
@@ -71,7 +73,7 @@ const SignUp = () => {
                 </Dropdown.Menu>
               </Dropdown>
             </Card.Body>
-            
+            </form>
           </Card>
           <Button onClick={signUpUser}>Sign up</Button>
         </Col>

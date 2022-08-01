@@ -64,15 +64,16 @@ const buyLand = async (token, landId) => {
   }
 }
 
-const userSignUp = async(userName, userPassword, userRole, name,token)=>{
+const userSignUp = async(userName, userPassword, userRole, Name)=>{
+    console.log(userName)
     try {
-        const response = await axios.post(
-          `https://metaverse-api.herokuapp.com/users/details/`,
+        const response = await axios.put(
+          `https://metaverse-api.herokuapp.com/auth/signup`,
           {
-            headers: {
-              Authorization: `Bearer ${token}`,
-              'Content-type': 'Application/json',
-            },
+           "username":userName,
+           "password": userPassword,
+           "name": Name,
+           "role": userRole
           },
         )
         let bought = response.status
