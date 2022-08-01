@@ -11,7 +11,7 @@ const Lands = () => {
 
   const fetchLands = useCallback(async () => {
     const res = await getAllLands()
-    console.log(res)
+    
     setLands(res)
   }, [])
   const renderLands = (lands) => {

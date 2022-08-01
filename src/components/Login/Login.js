@@ -28,10 +28,10 @@ const Login = ({ setUserCreds, userCreds, connected, setConnected }) => {
     })
     setUserCreds(data)
     setConnected(true)
-    console.log(data)
+   
   }
   if (connected) {
-    console.log(userCreds)
+   
     // if use connected to the system
     return <Navigate to="/lands" />
   } else

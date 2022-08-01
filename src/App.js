@@ -16,7 +16,7 @@ function App() {
     <div>
       {!connected ? (
         <div>
-          <CustomNavbar />
+          <CustomNavbar connected={connected}  />
           <Routes>
             <Route
               path="/login"
@@ -35,7 +35,7 @@ function App() {
       ) : (
         <UserContext.Provider value={currentUser}>
           <div className="App">
-            <CustomNavbar />
+            <CustomNavbar connected={connected} />
             <Routes>
               <Route
                 path="/login"

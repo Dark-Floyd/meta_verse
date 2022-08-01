@@ -1,41 +1,50 @@
 import './LandInfo.css'
-import { useCallback, useContext, useEffect, useState } from 'react'
+import { Fragment, useCallback, useContext, useEffect, useState } from 'react'
 import { Link, useParams } from 'react-router-dom'
 import UserContext from '../../UserContext'
 import { Navigate } from 'react-router-dom'
-import { buyLand, getSingleLand, getUserDetails } from '../../api'
+import { buyLand, getSingleLand, getUserDetails, updateLand } from '../../api'
 import { Button, ButtonGroup, Card, Spinner } from 'react-bootstrap'
 
 const LandInfo = (token,userId) => {
   const params = useParams()
+  console.log(params)
   const [id] = useState(params.id)
 
   const [land, setLand] = useState()
   const [money, setMoney] = useState()
   const [isBought, setIsBought] = useState(false)  
+  const [priceUpdate, setPriceUpdate] = useState()
 
   const fetchSingleLand = useCallback(async () => {
     const res = await getSingleLand(id)
-    console.log(res)
+   
     setLand(res)
   }, [])
 
   const fetchUserDetails = useCallback(async () => {
     const res = await getUserDetails(token.token)
-    console.log(res)
+   
     setMoney(res)
   }, [])
 
   const fetchTryToBuy = useCallback(async () => {
-    console.log(token.token)
+   
     const res = await buyLand(token.token,id)
     console.log(res)
-    setIsBought(res)
+    if (res===200)
+        setIsBought(true)
   }, [])
-
+  const fetchUpdateLand = useCallback(async () => {
+   
+    const res = await updateLand(token.token,id,priceUpdate,true)
+    console.log(res)
+    if (res===200)
+        setIsBought(false)
+  }, [])
   const renderLand = (land) => {
     return (
-      <Card>
+      <Fragment>
         <Card.Body>
           <Card.Title>Owner: {land.ownerName}</Card.Title>
           <Card.Text>Price:{land.price}</Card.Text>
@@ -48,16 +57,21 @@ const LandInfo = (token,userId) => {
             <div>Not for sale!</div>
           )}
         </Card.Footer>
-      </Card>
+      </Fragment>
     )
   }
   const renderMoney = (money) => {
-    return<Card>{money}</Card>
+    return<div>{money}</div>
   }
 
   const handleBuying = () =>{
     fetchTryToBuy()
   }
+
+  const handleUpdating = () =>{
+      fetchUpdateLand()
+  }
+
   // createdAt: "2022-08-01T13:08:36.833Z"
   // game: "https://dark-floyd.github.io/Webtech2/"
   // isOnSale: false
@@ -74,22 +88,26 @@ const LandInfo = (token,userId) => {
   useEffect(() => {
     fetchSingleLand()
     fetchUserDetails()
-    fetchTryToBuy()
-  }, [money])
+  }, [money,isBought])
+  
   return (
     <div>
+       <Card style={{width:'30rem',alignSelf:'center'}}> 
       {land ? <div>{renderLand(land)} </div> : <Spinner animation="grow" />}
       {money ? <div>{renderMoney(money)} </div> : <Spinner animation="grow" />}
-      {!isBought? <div>This property belongs to you</div>:<div>You cannot buy this property</div>}
-      
-      
-      <Card>
-        <ButtonGroup aria-label="Basic example">
-          <Button variant="secondary" onclick={handleBuying}>Buy</Button>
-          <Button variant="secondary">Middle</Button>
-          <Button variant="secondary">Right</Button>
+      {isBought? <div>This property belongs to you</div>:<div>You cannot buy this property</div>}
+      <ButtonGroup aria-label="Basic example">
+          <Button variant="secondary" onClick={handleBuying}>Buy</Button>
+          <Button variant="secondary" onClick={handleUpdating}>Put for Sale</Button>
+          <input
+                  type="number"
+                  onChange={(e) => setPriceUpdate(e.target.value)}
+                />
+        
         </ButtonGroup>
       </Card>
+      
+     
     </div>
 
     

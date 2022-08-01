@@ -4,34 +4,59 @@ import { Link } from 'react-router-dom'
 import { LinkContainer } from 'react-router-bootstrap'
 import colors from '../constants/colors'
 
-const CustomNavbar = () => {
+const CustomNavbar = (connected) => {
   return (
     <Navbar bg="dark" variant="dark">
       <Container>
         <Navbar.Brand>Z&D</Navbar.Brand>
         <Nav className="me-auto">
-          <LinkContainer to="/login">
-            <Nav.Link>Login</Nav.Link>
-          </LinkContainer>
-          <LinkContainer to="/signup">
-            <Nav.Link>Sign up</Nav.Link>
-          </LinkContainer>
+          {connected.connected ? null : (
+            <div>
+              <LinkContainer to="/login">
+                <Nav.Link>Login</Nav.Link>
+              </LinkContainer>
+              <LinkContainer to="/signup">
+                <Nav.Link>Sign up</Nav.Link>
+              </LinkContainer>
+            </div>
+          )}
+
           <LinkContainer to="/about">
             <Nav.Link>About</Nav.Link>
           </LinkContainer>
           <LinkContainer to="/lands">
             <Nav.Link>lands</Nav.Link>
           </LinkContainer>
-          <NavDropdown title="Map Legend" >
-            <NavDropdown.Item style={{backgroundColor:colors.owned,color:'white'}}>Owned</NavDropdown.Item>
-           
-            <NavDropdown.Item style={{backgroundColor:colors.park,color:'white'}}>Park</NavDropdown.Item>
-            
-            <NavDropdown.Item style={{backgroundColor:colors.road,color:'white'}}>Road</NavDropdown.Item>
-            
-            <NavDropdown.Item style={{backgroundColor:colors.for_sale,color:'white'}}>For Sale</NavDropdown.Item>
-           
-            <NavDropdown.Item style={{backgroundColor:colors.not_for_sale,color:'white'}}>Not For Sale</NavDropdown.Item>
+          <NavDropdown title="Map Legend">
+            <NavDropdown.Item
+              style={{ backgroundColor: colors.owned, color: 'white' }}
+            >
+              Owned
+            </NavDropdown.Item>
+
+            <NavDropdown.Item
+              style={{ backgroundColor: colors.park, color: 'white' }}
+            >
+              Park
+            </NavDropdown.Item>
+
+            <NavDropdown.Item
+              style={{ backgroundColor: colors.road, color: 'white' }}
+            >
+              Road
+            </NavDropdown.Item>
+
+            <NavDropdown.Item
+              style={{ backgroundColor: colors.for_sale, color: 'white' }}
+            >
+              For Sale
+            </NavDropdown.Item>
+
+            <NavDropdown.Item
+              style={{ backgroundColor: colors.not_for_sale, color: 'white' }}
+            >
+              Not For Sale
+            </NavDropdown.Item>
           </NavDropdown>
         </Nav>
       </Container>

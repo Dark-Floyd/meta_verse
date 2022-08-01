@@ -43,11 +43,11 @@ const getSingleLand = async (_id) => {
 }
 
 const buyLand = async (token, landId) => {
-  console.log(token)
-  console.log(landId)
+  console.log(token,landId)
+ 
   try {
     const response = await axios.post(
-      `https://metaverse-api.herokuapp.com/lands/buy/${landId}`,
+      `https://metaverse-api.herokuapp.com/lands/buy/${landId}`,null,
       {
         headers: {
           Authorization: `Bearer ${token}`,
@@ -55,12 +55,54 @@ const buyLand = async (token, landId) => {
         },
       },
     )
+    console.log(response.status)
     let bought = response.status
-    console.log(bought)
+   
     return bought
   } catch (error) {
     console.log(error)
   }
 }
 
-export { getAllLands, getSingleLand, getUserDetails, buyLand }
+const userSignUp = async(userName, userPassword, userRole, name,token)=>{
+    try {
+        const response = await axios.post(
+          `https://metaverse-api.herokuapp.com/users/details/`,
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+              'Content-type': 'Application/json',
+            },
+          },
+        )
+        let bought = response.status
+        console.log(bought)
+        return bought
+      } catch (error) {
+        console.log(error)
+      }
+}
+
+const updateLand = async (token, landId,price,isOnSale) => {
+    console.log(token,landId,price)
+   
+    try {
+      const response = await axios.put(
+        `https://metaverse-api.herokuapp.com/lands/${landId}`,{price,isOnSale},
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+            'Content-type': 'Application/json',
+          },
+        },
+      )
+      
+      let bought = response.status
+     
+      return bought
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
+export { getAllLands, getSingleLand, getUserDetails, buyLand ,userSignUp,updateLand}
