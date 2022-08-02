@@ -10,7 +10,6 @@ const SingleLand = (props) => {
 
   const chooseColor = (type) => {
     let tmp
-    //console.log(userId.userId)
     if (ownerId === props.userId && type === 'PROPERTY')
       tmp = colors.owned
     else if (type === 'GARDEN') tmp = colors.park

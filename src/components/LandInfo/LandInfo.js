@@ -5,7 +5,7 @@ import UserContext from '../../UserContext'
 import { Navigate } from 'react-router-dom'
 import { buyLand, getSingleLand, getUserDetails, updateLand } from '../../api'
 import { Button, ButtonGroup, Card, Spinner } from 'react-bootstrap'
-
+import img from "../../img/nft.png"
 const LandInfo = (props) => {
   const params = useParams()
   const [id] = useState(params.id)
@@ -32,8 +32,19 @@ const LandInfo = (props) => {
     console.log(res)
     if (res === 200) setIsBought(true)
   }, [])
+
+  const renderType = (type)=>{
+      if(type==='PROPERTY')
+        return <div>Type: Property</div>
+      else if(type==='GARDEN')
+        return <div>This is a Garden</div>
+      else
+        return <div>This is a road
+
+        </div>
+  }
   const fetchUpdateLand = useCallback(async () => {
-    const res = await updateLand(props.token, id, priceUpdate, isBought)
+    const res = await updateLand(props.token, id, priceUpdate, true)
     console.log(res)
     getSingleLand(id)
     if (res === 200) setIsBought(false)
@@ -44,14 +55,17 @@ const LandInfo = (props) => {
         <Card.Body>
           <Card.Title>Owner: {land.ownerName}</Card.Title>
           <Card.Text>Price:{land.price}</Card.Text>
-          <Card.Text>Game Link:{land.game}</Card.Text>
+            {renderType(land.type)}
+           <a href={`${land.game}`} target="_blank" rel="noreferrer">
+          <button>Game</button>
+        </a>
         </Card.Body>
         <Card.Footer>
             {console.log(props.userId)}
           {land.ownerId === props.userId ? (
-            <div>you own this</div>
+            <div>You own this property</div>
           ) : (
-            <div>you dont own this</div>
+            <div>You don't own this property</div>
           )}
           {land.isOnSale ? (
             <div>This property is for sale!</div>
@@ -94,11 +108,11 @@ const LandInfo = (props) => {
   }, [money, isBought])
 
   return (
-    <div>
+    <div className='img'>
       <Card style={{ width: '30rem', alignSelf: 'center' }}>
         {land ? <div>{renderLand(land)} </div> : <Spinner animation="grow" />}
         {money ? (
-          <div>{renderMoney(money)} </div>
+          <div>Wallet{renderMoney(money)} </div>
         ) : (
           <Spinner animation="grow" />
         )}
@@ -119,7 +133,7 @@ const LandInfo = (props) => {
             type="text"
             value={priceUpdate}
             onChange={(e) => setPriceUpdate(parseInt(e.target.value))}
-            
+            placeholder="Enter New Value"
           />
         </ButtonGroup>
       </Card>

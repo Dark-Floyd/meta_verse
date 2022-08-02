@@ -8,7 +8,7 @@ const CustomNavbar = (connected) => {
   return (
     <Navbar bg="dark" variant="dark">
       <Container>
-        <Navbar.Brand>Z&D</Navbar.Brand>
+        <Navbar.Brand>Z&D.Ltd</Navbar.Brand>
         <Nav className="me-auto">
           {connected.connected ? null : (
             <div>

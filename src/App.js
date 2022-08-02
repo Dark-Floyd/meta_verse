@@ -13,7 +13,7 @@ function App() {
   const [userCreds, setUserCreds] = useState({ userId: null, token: null })
   const [connected, setConnected] = useState(false)
   return (
-    <div>
+    <div className="App">
       {!connected ? (
         <div>
           <CustomNavbar connected={connected}  />
@@ -34,7 +34,7 @@ function App() {
         </div>
       ) : (
         <UserContext.Provider value={currentUser}>
-          <div className="App">
+          <div >
             <CustomNavbar connected={connected} />
             <Routes>
               <Route
