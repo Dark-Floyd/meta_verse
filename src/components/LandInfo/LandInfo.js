@@ -8,7 +8,6 @@ import { Button, ButtonGroup, Card, Spinner } from 'react-bootstrap'
 
 const LandInfo = (token, userId) => {
   const params = useParams()
-  console.log(params)
   const [id] = useState(params.id)
 
   const [land, setLand] = useState()
@@ -45,6 +44,7 @@ const LandInfo = (token, userId) => {
         <Card.Body>
           <Card.Title>Owner: {land.ownerName}</Card.Title>
           <Card.Text>Price:{land.price}</Card.Text>
+          <Card.Text>Game Link:{land.game}</Card.Text>
         </Card.Body>
         <Card.Footer>
           {land.ownerId === userId.userId ? (
@@ -104,7 +104,7 @@ const LandInfo = (token, userId) => {
         {isBought ? (
           <div>This property belongs to you</div>
         ) : (
-          <div>You cannot buy this property</div>
+          <div>This property is not yours</div>
         )}
         <ButtonGroup aria-label="Basic example">
           <Button variant="secondary" onClick={handleBuying}>

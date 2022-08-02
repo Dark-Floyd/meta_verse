@@ -4,7 +4,7 @@ import SingleLand from '../SingleLand/SingleLand'
 import { getAllLands } from '../../api/index'
 import { Spinner } from 'react-bootstrap'
 
-const Lands = () => {
+const Lands = (userId) => {
   const [lands, setLands] = useState([])
 
   const fetchLands = useCallback(async () => {
@@ -13,7 +13,7 @@ const Lands = () => {
     setLands(res)
   }, [])
   const renderLands = (lands) => {
-    return lands.map((land, index) => <SingleLand key={index} info={land} />)
+    return lands.map((land, index) => <SingleLand key={index} info={land} userId={userId.userId} />)
   }
 
   useEffect(() => {
@@ -22,7 +22,7 @@ const Lands = () => {
 
   return (
     <div>
-      
+        {console.log(userId.userId)}
         {lands ? <div className="allLand">{renderLands(lands)} </div> : <Spinner animation="grow" />}
      
     </div>

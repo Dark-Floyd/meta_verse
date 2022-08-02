@@ -4,14 +4,15 @@ import { useEffect, useState } from 'react'
 import colors from '../../constants/colors'
 import LandInfo from '../LandInfo/LandInfo'
 
-const SingleLand = ({ info }) => {
-  const { ownerId, _id, type, isOnSale } = info
+const SingleLand = (props) => {
+  const { ownerId, _id, type, isOnSale } = props.info
   const [color, setColor] = useState('')
 
   const chooseColor = (type) => {
     let tmp
-    if (ownerId === localStorage.getItem('user') && type === 'PROPERTY')
-      tmp = 'red'
+    //console.log(userId.userId)
+    if (ownerId === props.userId && type === 'PROPERTY')
+      tmp = colors.owned
     else if (type === 'GARDEN') tmp = colors.park
     else if (type === 'ROAD') tmp = colors.road
     else if (type === 'PROPERTY' && isOnSale === true) tmp = colors.for_sale

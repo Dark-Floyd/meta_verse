@@ -1,11 +1,8 @@
 import React, { Fragment, useState } from 'react'
 import { Card, Col, Container, Row } from 'react-bootstrap'
 import classes from './Login.css'
-import PropTypes from 'prop-types'
 import { Link, Navigate } from 'react-router-dom'
 
-let tokenFromLogin
-let userIdFromLogin
 const Login = ({ setUserCreds, userCreds, connected, setConnected }) => {
   const [username, setUserName] = useState()
   const [password, setPassword] = useState()

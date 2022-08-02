@@ -50,7 +50,7 @@ function App() {
               />
               <Route path="/signup" element={<SignUp />} />
               <Route path="/about" element={<About />} />
-              <Route path="/lands" element={<Lands />} />
+              <Route path="/lands" element={<Lands userId={userCreds.userId}/>} />
               <Route
                 path="/lands/:id"
                 element={
