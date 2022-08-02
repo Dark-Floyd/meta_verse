@@ -85,7 +85,7 @@ const userSignUp = async(userName, userPassword, userRole, Name)=>{
 }
 
 const updateLand = async (token, landId,price,isOnSale) => {
-    console.log(token,landId,price)
+    console.log(price)
    
     try {
       const response = await axios.put(

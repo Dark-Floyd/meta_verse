@@ -23,53 +23,50 @@ const Login = ({ setUserCreds, userCreds, connected, setConnected }) => {
       username,
       password,
     })
-    setUserCreds(data)
-    setConnected(true)
-   
+    
+    if (data.token) {
+      setUserCreds(data)
+      setConnected(true)
+    } else setConnected(false)
   }
   if (connected) {
-   
     // if use connected to the system
     return <Navigate to="/lands" />
   } else
     return (
-      <div className="login-wrapper" style={{alignContent:'center'}}>
-        
-          <h1>Please Log In</h1>
-          <form onSubmit={handleSubmit}>
-            <Row>
-              <p>Username</p>
-            </Row>
-            <Row>
-              <label>
-                <input
-                  type="text"
-                  onChange={(e) => setUserName(e.target.value)}
-                  
-                />
-              </label>
-              <label>
-                <p>Password</p>
-                <input
-                  type="password"
-                  onChange={(e) => setPassword(e.target.value)}
-                />
-              </label>
-            </Row>
+      <div className="login-wrapper" style={{ alignContent: 'center' }}>
+        <h1>Please Log In</h1>
+        <form onSubmit={handleSubmit}>
+          <Row>
+            <p>Username</p>
+          </Row>
+          <Row>
+            <label>
+              <input
+                type="text"
+                onChange={(e) => setUserName(e.target.value)}
+              />
+            </label>
+            <label>
+              <p>Password</p>
+              <input
+                type="password"
+                onChange={(e) => setPassword(e.target.value)}
+              />
+            </label>
+          </Row>
 
-            <div style={{margin:'1rem'}}>
-              <button type="submit">Submit</button>
+          <div style={{ margin: '1rem' }}>
+            <button type="submit">Submit</button>
+          </div>
+
+          <Link to={`/signup`}>
+            <div style={{ margin: '1rem' }}>
+              <button type="submit">Sign Up</button>
             </div>
-
-            <Link to={`/signup`}>
-              <div style={{margin:'1rem'}}>
-                <button type="submit">Sign Up</button>
-              </div>
-            </Link>
-          </form>
-     
+          </Link>
+        </form>
       </div>
-
     )
 }
 

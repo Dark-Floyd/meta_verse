@@ -33,15 +33,12 @@ const LandInfo = (props) => {
     if (res === 200) setIsBought(true)
   }, [])
 
-  const renderType = (type)=>{
-      if(type==='PROPERTY')
-        return <div style={{margin:'1rem'}}>Type: Property</div>
-      else if(type==='GARDEN')
-        return <div style={{margin:'1rem'}}>This is a Garden</div>
-      else
-        return <div style={{margin:'1rem'}}>This is a road
-
-        </div>
+  const renderType = (type) => {
+    if (type === 'PROPERTY')
+      return <div style={{ margin: '1rem' }}>Type: Property</div>
+    else if (type === 'GARDEN')
+      return <div style={{ margin: '1rem' }}>This is a Garden</div>
+    else return <div style={{ margin: '1rem' }}>This is a road</div>
   }
   const fetchUpdateLand = useCallback(async () => {
     const res = await updateLand(props.token, id, priceUpdate, true)
@@ -55,13 +52,13 @@ const LandInfo = (props) => {
         <Card.Body>
           <Card.Title>Owner: {land.ownerName}</Card.Title>
           <Card.Text>Price:{land.price}</Card.Text>
-            {renderType(land.type)}
-           <a href={`${land.game}`} target="_blank" rel="noreferrer">
-          <button>Game</button>
-        </a>
+          {renderType(land.type)}
+          <a href={`${land.game}`} target="_blank" rel="noreferrer">
+            <button>Game</button>
+          </a>
         </Card.Body>
         <Card.Footer>
-            {console.log(props.userId)}
+          {console.log(props.userId)}
           {land.ownerId === props.userId ? (
             <div>You own this property</div>
           ) : (
@@ -73,6 +70,7 @@ const LandInfo = (props) => {
             <div>Not for sale!</div>
           )}
         </Card.Footer>
+        
       </Fragment>
     )
   }
@@ -80,13 +78,20 @@ const LandInfo = (props) => {
     return <div>{money}</div>
   }
 
-  const handleBuying = () => {
+  const handleBuying = (e) => {
+    e.preventDefault()
     fetchTryToBuy()
   }
 
-  const handleUpdating = ( ) => {
+  const handleUpdating = (e) => {
+    e.preventDefault()
+    console.log(priceUpdate)
+    setPriceUpdate(priceUpdate)
     fetchUpdateLand()
-    
+  }
+  const handleNewPrice = (e) => {
+    e.preventDefault()
+    fetchSingleLand()
   }
 
   // createdAt: "2022-08-01T13:08:36.833Z"
@@ -105,12 +110,25 @@ const LandInfo = (props) => {
   useEffect(() => {
     fetchSingleLand()
     fetchUserDetails()
-  }, [money, isBought,priceUpdate])
+    fetchUpdateLand()
+  }, [money, isBought, priceUpdate])
 
   return (
-    <div className="img" style={{ backgroundImage: `url(${img})` ,height:'40rem'}}>
-      <Card style={{ width: '30rem', alignSelf: 'center',margin:'2rem' }}>
-        {land ? <div>{renderLand(land)} </div> : <Spinner animation="grow" />}
+    <div
+      className="img"
+      style={{ backgroundImage: `url(${img})`, height: '40rem' }}
+    >
+      <Card style={{ width: '30rem', alignSelf: 'center', margin: '2rem' }}>
+        {land ? <div>{renderLand(land)}
+        <iframe
+          style={{ backgroundColor: 'white' }}
+          id="game-window"
+          title="game-window"
+          src={land.game}
+          width="480px"
+          height="500px"
+          color="white"
+        ></iframe> </div> : <Spinner animation="grow" />}
         {money ? (
           <div>Wallet{renderMoney(money)} </div>
         ) : (
@@ -128,15 +146,17 @@ const LandInfo = (props) => {
           <Button variant="secondary" onClick={handleUpdating}>
             Put for Sale
           </Button>
-          
-          <input
-            type="text"
-            value={priceUpdate}
+          <form
+            onSubmit={handleNewPrice}
             onChange={(e) => setPriceUpdate(e.target.value)}
-            placeholder="Enter New Value"
-          />
+          >
+            <input type="number" placeholder="Enter New Value" />
+            {/* <button type="submit">Update Price</button> */}
+          </form>
         </ButtonGroup>
       </Card>
+    
+      
     </div>
   )
 }
