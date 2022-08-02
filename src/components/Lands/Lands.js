@@ -1,8 +1,6 @@
 import './Lands.css'
 import { useCallback, useEffect, useState } from 'react'
-import { Navigate } from 'react-router-dom'
 import SingleLand from '../SingleLand/SingleLand'
-import { lands3 } from '../../lands'
 import { getAllLands } from '../../api/index'
 import { Spinner } from 'react-bootstrap'
 
