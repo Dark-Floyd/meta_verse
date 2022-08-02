@@ -5,7 +5,7 @@ import UserContext from '../../UserContext'
 import { Navigate } from 'react-router-dom'
 import { buyLand, getSingleLand, getUserDetails, updateLand } from '../../api'
 import { Button, ButtonGroup, Card, Spinner } from 'react-bootstrap'
-import img from "../../img/nft.png"
+import img from '../../img/nft.png'
 const LandInfo = (props) => {
   const params = useParams()
   const [id] = useState(params.id)
@@ -35,11 +35,11 @@ const LandInfo = (props) => {
 
   const renderType = (type)=>{
       if(type==='PROPERTY')
-        return <div>Type: Property</div>
+        return <div style={{margin:'1rem'}}>Type: Property</div>
       else if(type==='GARDEN')
-        return <div>This is a Garden</div>
+        return <div style={{margin:'1rem'}}>This is a Garden</div>
       else
-        return <div>This is a road
+        return <div style={{margin:'1rem'}}>This is a road
 
         </div>
   }
@@ -105,11 +105,11 @@ const LandInfo = (props) => {
   useEffect(() => {
     fetchSingleLand()
     fetchUserDetails()
-  }, [money, isBought])
+  }, [money, isBought,priceUpdate])
 
   return (
-    <div className='img'>
-      <Card style={{ width: '30rem', alignSelf: 'center' }}>
+    <div className="img" style={{ backgroundImage: `url(${img})` ,height:'40rem'}}>
+      <Card style={{ width: '30rem', alignSelf: 'center',margin:'2rem' }}>
         {land ? <div>{renderLand(land)} </div> : <Spinner animation="grow" />}
         {money ? (
           <div>Wallet{renderMoney(money)} </div>
@@ -132,7 +132,7 @@ const LandInfo = (props) => {
           <input
             type="text"
             value={priceUpdate}
-            onChange={(e) => setPriceUpdate(parseInt(e.target.value))}
+            onChange={(e) => setPriceUpdate(e.target.value)}
             placeholder="Enter New Value"
           />
         </ButtonGroup>

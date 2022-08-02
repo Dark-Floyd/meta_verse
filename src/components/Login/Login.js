@@ -45,6 +45,7 @@ const Login = ({ setUserCreds, userCreds, connected, setConnected }) => {
                 <input
                   type="text"
                   onChange={(e) => setUserName(e.target.value)}
+                  
                 />
               </label>
               <label>
@@ -56,12 +57,12 @@ const Login = ({ setUserCreds, userCreds, connected, setConnected }) => {
               </label>
             </Row>
 
-            <div>
+            <div style={{margin:'1rem'}}>
               <button type="submit">Submit</button>
             </div>
 
             <Link to={`/signup`}>
-              <div>
+              <div style={{margin:'1rem'}}>
                 <button type="submit">Sign Up</button>
               </div>
             </Link>

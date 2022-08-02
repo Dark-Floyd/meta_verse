@@ -34,7 +34,7 @@ function App() {
         </div>
       ) : (
         <UserContext.Provider value={currentUser}>
-          <div >
+          <div className="App" >
             <CustomNavbar connected={connected} />
             <Routes>
               <Route
