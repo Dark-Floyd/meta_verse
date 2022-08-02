@@ -25,7 +25,7 @@ const CustomNavbar = (connected) => {
             <Nav.Link>About</Nav.Link>
           </LinkContainer>
           <LinkContainer to="/lands">
-            <Nav.Link>lands</Nav.Link>
+            <Nav.Link>Lands</Nav.Link>
           </LinkContainer>
           <NavDropdown title="Map Legend">
             <NavDropdown.Item

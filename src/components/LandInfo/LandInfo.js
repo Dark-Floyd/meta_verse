@@ -6,7 +6,7 @@ import { Navigate } from 'react-router-dom'
 import { buyLand, getSingleLand, getUserDetails, updateLand } from '../../api'
 import { Button, ButtonGroup, Card, Spinner } from 'react-bootstrap'
 
-const LandInfo = (token, userId) => {
+const LandInfo = (props) => {
   const params = useParams()
   const [id] = useState(params.id)
 
@@ -22,18 +22,18 @@ const LandInfo = (token, userId) => {
   }, [])
 
   const fetchUserDetails = useCallback(async () => {
-    const res = await getUserDetails(token.token)
+    const res = await getUserDetails(props.token)
 
     setMoney(res)
   }, [])
 
   const fetchTryToBuy = useCallback(async () => {
-    const res = await buyLand(token.token, id)
+    const res = await buyLand(props.token, id)
     console.log(res)
     if (res === 200) setIsBought(true)
   }, [])
   const fetchUpdateLand = useCallback(async () => {
-    const res = await updateLand(token.token, id, priceUpdate, true)
+    const res = await updateLand(props.token, id, priceUpdate, isBought)
     console.log(res)
     getSingleLand(id)
     if (res === 200) setIsBought(false)
@@ -47,7 +47,8 @@ const LandInfo = (token, userId) => {
           <Card.Text>Game Link:{land.game}</Card.Text>
         </Card.Body>
         <Card.Footer>
-          {land.ownerId === userId.userId ? (
+            {console.log(props.userId)}
+          {land.ownerId === props.userId ? (
             <div>you own this</div>
           ) : (
             <div>you dont own this</div>
@@ -101,11 +102,11 @@ const LandInfo = (token, userId) => {
         ) : (
           <Spinner animation="grow" />
         )}
-        {isBought ? (
+        {/* {isBought ? (
           <div>This property belongs to you</div>
         ) : (
           <div>This property is not yours</div>
-        )}
+        )} */}
         <ButtonGroup aria-label="Basic example">
           <Button variant="secondary" onClick={handleBuying}>
             Buy
